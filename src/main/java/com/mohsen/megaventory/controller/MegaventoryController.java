@@ -1,6 +1,7 @@
 package com.mohsen.megaventory.controller;
 
 import com.mohsen.megaventory.entity.MegaventoryProduct;
+import com.mohsen.megaventory.entity.MegaventorySupplierClient;
 import com.mohsen.megaventory.service.MegaventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -21,6 +22,11 @@ public class MegaventoryController {
     @PutMapping("/updateProduct")
     public ResponseEntity<String> updateProduct(@RequestBody MegaventoryProduct product) {
         return megaventoryService.updateProduct(product);
+    }
+
+    @PutMapping("/updateSupplierClient")
+    public ResponseEntity<String> updateSupplierClient(@RequestBody MegaventorySupplierClient mvSupplierClient) {
+        return megaventoryService.updateSupplierClient(mvSupplierClient);
     }
 
 }
