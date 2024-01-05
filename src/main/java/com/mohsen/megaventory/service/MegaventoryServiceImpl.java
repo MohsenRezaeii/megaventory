@@ -1,8 +1,12 @@
 package com.mohsen.megaventory.service;
 
+import com.mohsen.megaventory.entity.MegaventoryProduct;
+import com.mohsen.megaventory.entity.MegaventoryProductRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.BufferingClientHttpRequestFactory;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -11,21 +15,21 @@ public class MegaventoryServiceImpl implements MegaventoryService {
 
     @Value("${MEGAVENTORY_API_KEY}")
     private String apiKey;
+
     @Override
-    public ResponseEntity<String> getProducts() {
-        String url = "https://api.megaventory.com/v2017a/json/reply/ProductGet";
-        String requestBody = "{\"APIKEY\":\"" + apiKey + "\"}";
-        HttpEntity<String> requestEntity = new HttpEntity<>(requestBody);
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<String> response = restTemplate.postForEntity(
-                url,
-                requestEntity,
-                String.class
-        );
-        if (response.getStatusCode().is2xxSuccessful()) {
-            return response;
-        } else {
-            return new ResponseEntity<>(response.getStatusCode());
-        }
+    public ResponseEntity<String> updateProduct(MegaventoryProduct product) {
+
+        MegaventoryProductRequest productRequest = new MegaventoryProductRequest();
+        productRequest.setMvProduct(product);
+        productRequest.setApiKey(apiKey);
+        productRequest.setMvRecordAction("Insert");
+
+        HttpEntity<MegaventoryProductRequest> requestEntity = new HttpEntity<>(productRequest);
+
+        RestTemplate restTemplate = new RestTemplate(new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory()));
+
+        String megaventoryApiUrl = "https://api.megaventory.com/v2017a/Product/ProductUpdate";
+
+        return restTemplate.postForEntity(megaventoryApiUrl, requestEntity, String.class);
     }
 }
