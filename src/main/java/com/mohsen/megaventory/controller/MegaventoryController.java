@@ -1,5 +1,6 @@
 package com.mohsen.megaventory.controller;
 
+import com.mohsen.megaventory.entity.MegaventoryInventoryLocation;
 import com.mohsen.megaventory.entity.MegaventoryProduct;
 import com.mohsen.megaventory.entity.MegaventorySupplierClient;
 import com.mohsen.megaventory.service.MegaventoryService;
@@ -29,4 +30,8 @@ public class MegaventoryController {
         return megaventoryService.updateSupplierClient(mvSupplierClient);
     }
 
+    @PutMapping("/updateInventoryLocation")
+    public ResponseEntity<String> updateInventoryLocation(@RequestBody MegaventoryInventoryLocation mvInventoryLocation) {
+        return megaventoryService.updateInventoryLocation(mvInventoryLocation);
+    }
 }

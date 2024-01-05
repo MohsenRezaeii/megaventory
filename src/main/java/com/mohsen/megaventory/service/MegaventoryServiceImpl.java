@@ -1,9 +1,6 @@
 package com.mohsen.megaventory.service;
 
-import com.mohsen.megaventory.entity.MegaventoryProduct;
-import com.mohsen.megaventory.entity.MegaventoryProductRequest;
-import com.mohsen.megaventory.entity.MegaventorySupplierClient;
-import com.mohsen.megaventory.entity.MegaventorySupplierClientRequest;
+import com.mohsen.megaventory.entity.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
@@ -46,6 +43,22 @@ public class MegaventoryServiceImpl implements MegaventoryService {
         RestTemplate restTemplate = new RestTemplate(new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory()));
 
         String megaventoryApiUrl = "https://api.megaventory.com/v2017a/SupplierClient/SupplierClientUpdate";
+
+        return restTemplate.postForEntity(megaventoryApiUrl, requestEntity, String.class);
+    }
+
+    @Override
+    public ResponseEntity<String> updateInventoryLocation(MegaventoryInventoryLocation mvInventoryLocation) {
+        MegaventoryInventoryLocationRequest inventoryLocationRequest = new MegaventoryInventoryLocationRequest();
+        inventoryLocationRequest.setMvInventoryLocation(mvInventoryLocation);
+        inventoryLocationRequest.setApiKey(apiKey);
+        inventoryLocationRequest.setMvRecordAction("Insert");
+
+        HttpEntity<MegaventoryInventoryLocationRequest> requestEntity = new HttpEntity<>(inventoryLocationRequest);
+
+        RestTemplate restTemplate = new RestTemplate(new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory()));
+
+        String megaventoryApiUrl = "https://api.megaventory.com/v2017a/InventoryLocation/InventoryLocationUpdate";
 
         return restTemplate.postForEntity(megaventoryApiUrl, requestEntity, String.class);
     }
