@@ -1,0 +1,7 @@
+services:
+  megaventory-app:
+    image: mohsenrezaei89/megaventory-app:latest
+    build:
+      context: .
+    ports:
+      - "8080:8080"
