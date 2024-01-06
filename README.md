@@ -26,7 +26,7 @@ The project is organized into the following components:
    - MegaventoryController: Exposes REST endpoints to perform operations such as creating entities, establishing relationships, and updating availability and cost.
 
 ### How to Use
-**To run:** `docker compose up`
+**To run the project:** Run `docker compose up` from your command line (docker engine and docker compose are needed).
 
 1. **Creating Products:**
    - Send a PUT request to localhost:8080/updateProduct?mvRecordAction=Insert with the following request body (values are examples):
