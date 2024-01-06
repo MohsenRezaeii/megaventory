@@ -3,6 +3,9 @@ package com.mohsen.megaventory.entity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class MegaventorySupplierClient {
+
+    @JsonProperty("SupplierClientId")
+    private long supplierClientId;
     @JsonProperty("SupplierClientType")
     private String supplierClientType;
 
@@ -18,12 +21,21 @@ public class MegaventorySupplierClient {
     @JsonProperty("SupplierClientEmail")
     private String supplierClientEmail;
 
-    public MegaventorySupplierClient(String supplierClientType, String supplierClientName, String supplierClientShippingAddress1, String supplierClientPhone1, String supplierClientEmail) {
+    public MegaventorySupplierClient(long supplierClientId, String supplierClientType, String supplierClientName, String supplierClientShippingAddress1, String supplierClientPhone1, String supplierClientEmail) {
+        this.supplierClientId = supplierClientId;
         this.supplierClientType = supplierClientType;
         this.supplierClientName = supplierClientName;
         this.supplierClientShippingAddress1 = supplierClientShippingAddress1;
         this.supplierClientPhone1 = supplierClientPhone1;
         this.supplierClientEmail = supplierClientEmail;
+    }
+
+    public long getSupplierClientId() {
+        return supplierClientId;
+    }
+
+    public void setSupplierClientId(long supplierClientId) {
+        this.supplierClientId = supplierClientId;
     }
 
     public String getSupplierClientType() {

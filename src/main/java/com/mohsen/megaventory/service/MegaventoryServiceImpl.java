@@ -16,12 +16,12 @@ public class MegaventoryServiceImpl implements MegaventoryService {
     private String apiKey;
 
     @Override
-    public ResponseEntity<String> updateProduct(MegaventoryProduct product) {
+    public ResponseEntity<String> updateProduct(MegaventoryProduct product, String mvRecordAction) {
 
         MegaventoryProductRequest productRequest = new MegaventoryProductRequest();
         productRequest.setMvProduct(product);
         productRequest.setApiKey(apiKey);
-        productRequest.setMvRecordAction("Insert");
+        productRequest.setMvRecordAction(mvRecordAction);
 
         HttpEntity<MegaventoryProductRequest> requestEntity = new HttpEntity<>(productRequest);
 
@@ -33,11 +33,11 @@ public class MegaventoryServiceImpl implements MegaventoryService {
     }
 
     @Override
-    public ResponseEntity<String> updateSupplierClient(MegaventorySupplierClient mvSupplierClient) {
+    public ResponseEntity<String> updateSupplierClient(MegaventorySupplierClient mvSupplierClient, String mvRecordAction) {
         MegaventorySupplierClientRequest supplierClientRequest = new MegaventorySupplierClientRequest();
         supplierClientRequest.setMvSupplierClient(mvSupplierClient);
         supplierClientRequest.setApiKey(apiKey);
-        supplierClientRequest.setMvRecordAction("Insert");
+        supplierClientRequest.setMvRecordAction(mvRecordAction);
         HttpEntity<MegaventorySupplierClientRequest> requestEntity = new HttpEntity<>(supplierClientRequest);
 
         RestTemplate restTemplate = new RestTemplate(new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory()));
@@ -48,11 +48,11 @@ public class MegaventoryServiceImpl implements MegaventoryService {
     }
 
     @Override
-    public ResponseEntity<String> updateInventoryLocation(MegaventoryInventoryLocation mvInventoryLocation) {
+    public ResponseEntity<String> updateInventoryLocation(MegaventoryInventoryLocation mvInventoryLocation, String mvRecordAction) {
         MegaventoryInventoryLocationRequest inventoryLocationRequest = new MegaventoryInventoryLocationRequest();
         inventoryLocationRequest.setMvInventoryLocation(mvInventoryLocation);
         inventoryLocationRequest.setApiKey(apiKey);
-        inventoryLocationRequest.setMvRecordAction("Insert");
+        inventoryLocationRequest.setMvRecordAction(mvRecordAction);
 
         HttpEntity<MegaventoryInventoryLocationRequest> requestEntity = new HttpEntity<>(inventoryLocationRequest);
 

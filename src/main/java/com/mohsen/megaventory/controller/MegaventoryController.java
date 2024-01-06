@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -21,17 +22,17 @@ public class MegaventoryController {
     }
 
     @PutMapping("/updateProduct")
-    public ResponseEntity<String> updateProduct(@RequestBody MegaventoryProduct product) {
-        return megaventoryService.updateProduct(product);
+    public ResponseEntity<String> updateProduct(@RequestBody MegaventoryProduct product, @RequestParam String mvRecordAction) {
+        return megaventoryService.updateProduct(product, mvRecordAction);
     }
 
     @PutMapping("/updateSupplierClient")
-    public ResponseEntity<String> updateSupplierClient(@RequestBody MegaventorySupplierClient mvSupplierClient) {
-        return megaventoryService.updateSupplierClient(mvSupplierClient);
+    public ResponseEntity<String> updateSupplierClient(@RequestBody MegaventorySupplierClient mvSupplierClient, @RequestParam String mvRecordAction) {
+        return megaventoryService.updateSupplierClient(mvSupplierClient, mvRecordAction);
     }
 
     @PutMapping("/updateInventoryLocation")
-    public ResponseEntity<String> updateInventoryLocation(@RequestBody MegaventoryInventoryLocation mvInventoryLocation) {
-        return megaventoryService.updateInventoryLocation(mvInventoryLocation);
+    public ResponseEntity<String> updateInventoryLocation(@RequestBody MegaventoryInventoryLocation mvInventoryLocation, @RequestParam String mvRecordAction) {
+        return megaventoryService.updateInventoryLocation(mvInventoryLocation, mvRecordAction);
     }
 }
