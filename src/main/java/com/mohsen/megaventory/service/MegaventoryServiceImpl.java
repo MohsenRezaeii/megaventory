@@ -6,12 +6,8 @@ import com.mohsen.megaventory.request.MegaventoryInventoryLocationStockRequest;
 import com.mohsen.megaventory.request.MegaventoryProductRequest;
 import com.mohsen.megaventory.request.MegaventorySupplierClientRequest;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.client.BufferingClientHttpRequestFactory;
-import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -28,14 +24,8 @@ public class MegaventoryServiceImpl implements MegaventoryService {
         productRequest.setMvProduct(product);
         productRequest.setApiKey(apiKey);
         productRequest.setMvRecordAction(mvRecordAction);
-
-        HttpEntity<MegaventoryProductRequest> requestEntity = new HttpEntity<>(productRequest);
-
-        RestTemplate restTemplate = new RestTemplate(new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory()));
-
-        String megaventoryApiUrl = "https://api.megaventory.com/v2017a/Product/ProductUpdate";
-
-        return restTemplate.postForEntity(megaventoryApiUrl, requestEntity, String.class);
+        MegaventoryRequestResponse<MegaventoryProductRequest> requestResponse = new MegaventoryRequestResponse<>();
+        return requestResponse.exchange(productRequest, "Product/ProductUpdate");
     }
 
     @Override
@@ -44,13 +34,8 @@ public class MegaventoryServiceImpl implements MegaventoryService {
         supplierClientRequest.setMvSupplierClient(mvSupplierClient);
         supplierClientRequest.setApiKey(apiKey);
         supplierClientRequest.setMvRecordAction(mvRecordAction);
-        HttpEntity<MegaventorySupplierClientRequest> requestEntity = new HttpEntity<>(supplierClientRequest);
-
-        RestTemplate restTemplate = new RestTemplate(new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory()));
-
-        String megaventoryApiUrl = "https://api.megaventory.com/v2017a/SupplierClient/SupplierClientUpdate";
-
-        return restTemplate.postForEntity(megaventoryApiUrl, requestEntity, String.class);
+        MegaventoryRequestResponse<MegaventorySupplierClientRequest> requestResponse = new MegaventoryRequestResponse<>();
+        return requestResponse.exchange(supplierClientRequest, "SupplierClient/SupplierClientUpdate");
     }
 
     @Override
@@ -59,14 +44,8 @@ public class MegaventoryServiceImpl implements MegaventoryService {
         inventoryLocationRequest.setMvInventoryLocation(mvInventoryLocation);
         inventoryLocationRequest.setApiKey(apiKey);
         inventoryLocationRequest.setMvRecordAction(mvRecordAction);
-
-        HttpEntity<MegaventoryInventoryLocationRequest> requestEntity = new HttpEntity<>(inventoryLocationRequest);
-
-        RestTemplate restTemplate = new RestTemplate(new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory()));
-
-        String megaventoryApiUrl = "https://api.megaventory.com/v2017a/InventoryLocation/InventoryLocationUpdate";
-
-        return restTemplate.postForEntity(megaventoryApiUrl, requestEntity, String.class);
+        MegaventoryRequestResponse<MegaventoryInventoryLocationRequest> requestResponse = new MegaventoryRequestResponse<>();
+        return requestResponse.exchange(inventoryLocationRequest, "InventoryLocation/InventoryLocationUpdate");
     }
 
     @Override
@@ -74,14 +53,7 @@ public class MegaventoryServiceImpl implements MegaventoryService {
         MegaventoryInventoryLocationStockRequest inventoryLocationStockRequest = new MegaventoryInventoryLocationStockRequest();
         inventoryLocationStockRequest.setProductStockUpdateList(mvInventoryLocationStockList);
         inventoryLocationStockRequest.setApiKey(apiKey);
-        System.out.println(inventoryLocationStockRequest.getApiKey());
-
-        HttpEntity<MegaventoryInventoryLocationStockRequest> requestEntity = new HttpEntity<>(inventoryLocationStockRequest);
-
-        RestTemplate restTemplate = new RestTemplate(new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory()));
-
-        String megaventoryApiUrl = "https://api.megaventory.com/v2017a/InventoryLocationStock/ProductStockUpdate";
-
-        return restTemplate.postForEntity(megaventoryApiUrl, requestEntity, String.class);
+        MegaventoryRequestResponse<MegaventoryInventoryLocationStockRequest> requestResponse = new MegaventoryRequestResponse<>();
+        return requestResponse.exchange(inventoryLocationStockRequest, "InventoryLocationStock/ProductStockUpdate");
     }
 }
